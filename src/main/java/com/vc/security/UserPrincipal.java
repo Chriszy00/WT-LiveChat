@@ -14,13 +14,14 @@ import com.vc.entity.User;
 
 public class UserPrincipal implements UserDetails {
 
+	
 	private static final long serialVersionUID = -194333730406082750L;
 
 	private Long id;
 
-	private String name;
+	private String firstName;
 
-	private String username;
+	private String lastName;
 
 	@JsonIgnore
 	private String email;
@@ -30,11 +31,14 @@ public class UserPrincipal implements UserDetails {
 
 	private Collection<? extends GrantedAuthority> authorities;
 
-	public UserPrincipal(Long id, String name, String username, String email, String password,
+
+
+	public UserPrincipal(Long id, String firstName, String lastName, String email, String password,
 			Collection<? extends GrantedAuthority> authorities) {
+		super();
 		this.id = id;
-		this.name = name;
-		this.username = username;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 		this.authorities = authorities;
@@ -52,17 +56,24 @@ public class UserPrincipal implements UserDetails {
 		return id;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
 
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
 	public String getEmail() {
 		return email;
-	}
-
-	@Override
-	public String getUsername() {
-		return username;
 	}
 
 	@Override
@@ -110,4 +121,10 @@ public class UserPrincipal implements UserDetails {
 
 		return Objects.hash(id);
 	}
+
+	@Override
+	public String getUsername() {
+		return email;
+	}
+
 }
